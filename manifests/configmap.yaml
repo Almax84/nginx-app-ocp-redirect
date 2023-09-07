@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-redirect-config
+  namespace: esercito-tekton
+data:
+  nginx-redirect-config.conf: |
+    server {
+        listen 8080;
+        server_name www.demo-app-route-testproject.apps.lab01.gpslab.club;
+        location / {
+            return 301 https://demo-app-route-testproject.apps.dscrimiecluster1.apps.lab01.gpslab.club;
+        }
+    }
+
