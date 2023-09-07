@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-container-service
+  namespace: esercito-tekton
+  labels:
+    app: nginx-container
+spec:
+  selector:
+    deployment: nginx-container
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 8443
+
