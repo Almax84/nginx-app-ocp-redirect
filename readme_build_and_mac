@@ -1,0 +1,3 @@
+Le immagini costruite dal Mac non vanno bene, va specificata la platform
+ podman build  --platform linux/amd64  -t quay.io/dscrimie/nginx-redirect:amd64 .
+
