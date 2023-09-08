@@ -16,17 +16,15 @@ spec:
     metadata:
       labels:
         deployment: nginx-container
-      annotations:
-        openshift.io/generated-by: OpenShiftNewApp
     spec:
       volumes:
         - name: nginx-config-volume
           configMap:
             name: nginx-redirect-config
+            defaultMode: 420
       containers:
         - name: nginx-container
-          image: >-
-            quay.io/dscrimie/nginx-redirect:confd
+          image: 'quay.io/dscrimie/nginx-redirect:confd'
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -39,11 +37,4 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: Always
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
-      dnsPolicy: ClusterFirst
-      securityContext: {}
-      schedulerName: default-scheduler
-
-
 
