@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: nginx2-container-service
+  namespace: esercito-tekton
+spec:
+  host: nginx2-container-service-esercito-tekton.apps.lab01.gpslab.club
+  to:
+    kind: Service
+    name: nginx-container-service
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
