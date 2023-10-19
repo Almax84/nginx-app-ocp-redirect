@@ -1,0 +1,41 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}-nginx-container"
+  namespace: "{{ .Values.namespace }}"
+  labels:
+    app: "{{ .Release.Name }}-nginx-container"
+    app.kubernetes.io/component: nginx-container
+    app.kubernetes.io/instance: "{{ .Release.Name }}-nginx-container"
+spec:
+  replicas: "{{ .Values.replicaCount }}"
+  selector:
+    matchLabels:
+      deployment: "{{ .Release.Name }}-nginx-container"
+  template:
+    metadata:
+      labels:
+        deployment: "{{ .Release.Name }}-nginx-container"
+    spec:
+      volumes:
+        - name: nginx-config-volume
+          configMap:
+            name: "{{ .Values.configMapName }}"
+            defaultMode: 420
+      containers:
+        - name: nginx-container
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          ports:
+        {{- range .Values.containerPorts }}
+            - containerPort: {{ .containerPort }}
+              protocol: {{ .protocol }}
+        {{- end }}         
+          resources: {}
+          volumeMounts:
+            - name: nginx-config-volume
+              mountPath: /etc/nginx/conf.d/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+

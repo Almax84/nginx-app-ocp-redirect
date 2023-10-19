@@ -1,0 +1,25 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: nginx-www
+  namespace: esercito-tekton
+spec:
+  host: www.spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club
+  to:
+    kind: Service
+    name: nginx-container-service
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: www.spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-19T11:39:38Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.lab01.gpslab.club
+

@@ -1,0 +1,15 @@
+# values-prod.yaml
+replicaCount: 1
+image:
+  repository: quay.io/dscrimie/nginx-redirect
+  tag: confd
+  pullPolicy: Always
+containerPorts:
+  - name: http
+    containerPort: 8080
+    protocol: TCP
+  - name: https
+    containerPort: 8443
+    protocol: TCP
+configMapName: nginx-redirect-config
+

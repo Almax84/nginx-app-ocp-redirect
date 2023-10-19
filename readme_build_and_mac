@@ -1,3 +1,28 @@
+
+Comandi Helm
+
+installare la helm cli
+1. Dalla console di Openshift, cliccare in alto sul '?', poi 'Command Line Tools'. Scaricare quindi helm cli e metterlo sulla macchina interessata
+2. Eseguire la creazione di un semplice Helm chart, ad esempio 'helm create nginx_redirect'. Il comando creerà una cartella locale nginx_redirect con questa alberatura
+nginx_redirect/
+├── Chart.yaml
+├── charts
+├── templates
+│   ├── NOTES.txt
+│   ├── _helpers.tpl
+│   ├── deployment.yaml
+│   ├── hpa.yaml
+│   ├── ingress.yaml
+│   ├── service.yaml
+│   ├── serviceaccount.yaml
+│   └── tests
+│       └── test-connection.yaml
+└── values.yaml
+
+Si noti che è possibile duplicare il file values.yaml rinominandolo come si desidera, in quanto sarà sufficiente indicare il nome giusto su ArgoCD. Inoltre è possibile avere tanti file values quanti sono gli ambienti, es. values-prod.yaml e values-test.yaml
+
+I file creati sono dei template, e possono essere cancellati. E' importante però lasciare l'alberatura delle cartelle
+
 Le immagini costruite dal Mac non vanno bene, va specificata la platform
  podman build  --platform linux/amd64  -t quay.io/dscrimie/nginx-redirect:amd64 .
 
