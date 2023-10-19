@@ -13,3 +13,26 @@ containerPorts:
     protocol: TCP
 configMapName: nginx-redirect-config
 
+server_routes: |
+  server {
+      listen 8080;
+      server_name nginx-container-service-esercito-tekton.apps.lab01.gpslab.club;
+      location / {
+          return 301  https://spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
+      }
+  }
+  server {
+      listen 8080;
+      server_name nginx2-container-service-esercito-tekton.apps.lab01.gpslab.club;
+      location / {
+          return 301  https://spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
+      }
+  }
+  server {
+      listen 8080;
+      server_name www.spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
+      location / {
+          return 301  https://spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
+      }
+  }
+
