@@ -13,7 +13,7 @@ spec:
       protocol: TCP
       port: 8080
       targetPort: 8080
-    - name: https
+    - name: https-alt
       protocol: TCP
       port: 443
       targetPort: 8443
