@@ -12,27 +12,28 @@ containerPorts:
     containerPort: 8443
     protocol: TCP
 configMapName: nginx-redirect-config
-
-server_routes: |
-  server {
+  # ogni elemento che inizia con '-' è un elemento di una lista che viene poi iterata nella configmap per creare un blocco di testo unico
+  # quindi ogni volta che si aggiunge un blocchetto server {} questo deve iniziare con '-'
+server_routes:
+  - |
+    server {
       listen 8080;
       server_name nginx-container-service-esercito-tekton.apps.lab01.gpslab.club;
       location / {
-          return 301  https://spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
+        return 301  https://spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
       }
-  }
-  server {
+  - |
+    server {
       listen 8080;
       server_name nginx2-container-service-esercito-tekton.apps.lab01.gpslab.club;
       location / {
-          return 301  https://spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
+        return 301  https://spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
       }
-  }
-  server {
+  - |
+    server {
       listen 8080;
       server_name www.spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
       location / {
-          return 301  https://spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
+        return 301  https://spring-helloworld-app1-esercito-tekton.apps.lab01.gpslab.club;
       }
-  }
 

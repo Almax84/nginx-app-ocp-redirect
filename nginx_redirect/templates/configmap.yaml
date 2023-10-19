@@ -4,6 +4,9 @@ metadata:
   name: nginx-redirect-config
   namespace: esercito-tekton
 data:
-  nginx-redirect-config.conf: {{ .Values.server_routes | nindent 4 }}
+  nginx-redirect-config.conf: |-
+{{- range .Values.server_routes }}
+{{ . | nindent 4 }}  #la funzione nindent 4 indenta i valori da includere in questo yaml di 4 spazi. Questo per evitare errori di formattazione
+{{- end }}
 
 
