@@ -23,6 +23,8 @@ Si noti che è possibile duplicare il file values.yaml rinominandolo come si des
 
 I file creati sono dei template, e possono essere cancellati. E' importante però lasciare l'alberatura delle cartelle
 
+3. Per verificare che gli yaml vengano popolati correttamente, portarsi nella cartella nginx_redirect ed eseguire "helm template my-nginx-chart . -f values-prod.yaml  --debug" 
+
 Le immagini costruite dal Mac non vanno bene, va specificata la platform
  podman build  --platform linux/amd64  -t quay.io/dscrimie/nginx-redirect:amd64 .
 
